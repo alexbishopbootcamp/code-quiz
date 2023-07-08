@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <!-- Defer so the script run once DOM is ready -->
+  <script src="js/script.js" defer></script>
   <title>Code Quiz!</title>
 </head>
 <body>
@@ -12,12 +14,12 @@
     <span>Time: 999</span>
   </header>
   <main>
-    <section>
+    <section id="start">
       <h1>Coding Quiz Challenge</h1>
       <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
       <button>Start Quiz</button>
     </section>
-    <section>
+    <section id="question" class="hidden">
       <h1>Question Text here:</h1>
       <ul>
         <li><button>Answer 1</button></li>
@@ -28,7 +30,7 @@
       <hr>
       <p>Wrong!</p>
     </section>
-    <section>
+    <section id="done" class="hidden">
       <h1>All done!</h1>
       <p>Your final score is 999</p>
       <form>
@@ -36,7 +38,7 @@
         <input type="text" id="initials" name="initials">
         <button>Submit</button>
     </section>
-    <section>
+    <section id="highscore" class="hidden">
       <h1>High Scores</h1>
       <ul>
         <li>1. AAA - 999</li>

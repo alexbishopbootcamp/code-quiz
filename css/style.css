@@ -38,6 +38,10 @@ section {
   background-color: var(--background-color);
 }
 
+.hidden {
+  display: none;
+}
+
 hr {
   width: 100%;
 }
