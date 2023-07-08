@@ -5,7 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Quiz!</title>
 </head>
-<body>
-  
+<body style="margin: 0; padding: 0; background-color: #ffaaff;">
+  <header style="display: flex; justify-content: space-between; align-items: center; height: 80px; background: #aaffaa;">
+    <span style="padding: 20px;">View High Scores</span>
+    <span style="padding: 20px;">Time: 999</span>
+  </header>
+  <main style="display: flex; flex-direction: column; align-items: center">
+    <section style="display: flex; flex-direction: column; align-items: center; padding: 30px; width: 600px; background: #ffaaaa;">
+      <h1>Coding Quiz Challenge</h1>
+      <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+      <button>Start Quiz</button>
+    </section>
+    <section style="display: flex; flex-direction: column; align-items: center; padding: 30px; width: 600px; background: #aaaaff;">
+      <h1>Question Text here:</h1>
+      <ul>
+        <li><button>Answer 1</button></li>
+        <li><button>Answer 2</button></li>
+        <li><button>Answer 3</button></li>
+        <li><button>Answer 4</button></li>
+      </ul>
+      <hr style="width: 100%">
+      <p>Wrong!</p>
+    </section>
+    <section style="display: flex; flex-direction: column; align-items: center; padding: 30px; width: 600px; background: #ffffaa;">
+      <h1>All done!</h1>
+      <p>Your final score is 999</p>
+      <form>
+        <label for="initials">Enter initials:</label>
+        <input type="text" id="initials" name="initials">
+        <button>Submit</button>
+    </section>
+    <section style="display: flex; flex-direction: column; align-items: center; padding: 30px; width: 600px; background: #aaffff;">
+      <h1>High Scores</h1>
+      <ul>
+        <li>1. AAA - 999</li>
+        <li>2. BBB - 888</li>
+        <li>3. CCC - 777</li>
+        <li>4. DDD - 666</li>
+        <li>5. EEE - 555</li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
