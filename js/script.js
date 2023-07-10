@@ -20,6 +20,7 @@ function hideAll(){
 
 function showSection(id){
   hideAll();
+  showHeader();
   document.querySelector(`#${id}`).classList.remove('hidden');
 }
 
@@ -114,6 +115,7 @@ document.querySelector('#highscore #clearhighscores').addEventListener('click', 
 
 document.querySelector('#viewhighscores').addEventListener('click', function(){
   showSection('highscore');
+  hideHeader();
   populateHighscores();
 });
 
@@ -169,7 +171,17 @@ function saveHighscore(){
   highscores.splice(5);
   localStorage.setItem('highscores', JSON.stringify(highscores));
   showSection('highscore');
+  hideHeader();
   populateHighscores();
+}
+
+// Functions to hide/show the header on the highscore page
+function hideHeader(){
+  document.querySelector('header').classList.add('hidden');
+}
+
+function showHeader(){
+  document.querySelector('header').classList.remove('hidden');
 }
 
 // Populate the highscores list
