@@ -31,7 +31,7 @@ function spawnTimer(){
   return {
     startTimer: () => {
       // Start with 75 seconds on the clock
-      timeLeft = 75;
+      timeLeft = 750;
       document.querySelector('#timer').textContent = timeLeft;
 
       intervalId = setInterval(() => {
@@ -122,6 +122,41 @@ function flashFeedback(message){
   feedback.dataset.timeoutId = setTimeout(() => {
     feedback.classList.add('hidden');
   }, 1000);
+}
+
+document.querySelector('#done button').addEventListener('click', function(event){
+  // prevent default form submission
+  event.preventDefault();
+  saveHighscore();
+});
+
+// Take the user's name and save their highscore to localstorage
+function saveHighscore(){
+  const name = document.querySelector('#done input').value;
+  const score = timer.getSecondsLeft();
+  const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+  highscores.push({name, score});
+  // Sort the highscores by score
+  highscores.sort((a, b) => b.score - a.score);
+  // Only keep top 5 scores
+  highscores.splice(5);
+  localStorage.setItem('highscores', JSON.stringify(highscores));
+  showSection('highscore');
+  populateHighscores();
+}
+
+// Populate the highscores list
+function populateHighscores(){
+  const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+  const list = document.querySelector('#highscore ul');
+  // Clear the list
+  list.innerHTML = '';
+  // Add each highscore to the list
+  for(const highscore of highscores){
+    const li = document.createElement('li');
+    li.textContent = `${highscore.name} - ${highscore.score}`;
+    list.appendChild(li);
+  }
 }
 
 const questions = [
