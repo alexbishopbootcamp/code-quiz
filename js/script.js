@@ -18,40 +18,53 @@ function showSection(id){
 }
 
 function endQuiz(){
+  timer.stopTimer();
   showSection('done');
+  let score = timer.getSecondsLeft();
+  document.querySelector('#score').textContent = score;
 }
 
-function startTimer(){
-  let timeLeft = 75;
-
-  const intervalId = setInterval(() => {
-    timeLeft--;
-    document.querySelector('#timer').textContent = timeLeft;
-    if(timeLeft <= 0){
-      clearInterval(intervalId);
-      endQuiz();
-    }
-  }, 1000);
-
-  // Return some functions that we can use to interact with the timer
+function spawnTimer(){
+  let intervalId;
+  let timeLeft;
+  // Return functions that we can use to interact with the timer
   return {
+    startTimer: () => {
+      // Start with 75 seconds on the clock
+      timeLeft = 75;
+      document.querySelector('#timer').textContent = timeLeft;
+
+      intervalId = setInterval(() => {
+        timeLeft--;
+        document.querySelector('#timer').textContent = timeLeft;
+        if(timeLeft <= 0){
+          endQuiz();
+        }
+      }, 1000);
+    },
     stopTimer: () => {
       clearInterval(intervalId);
     },
+    getSecondsLeft: () => {
+      return timeLeft;
+    },
     subtractTime: (seconds) => {
       timeLeft -= seconds;
-      // Catch if time runs out
+      // End if time runs out
       if(timeLeft <= 0){
-        clearInterval(intervalId);
+        timeLeft = 0;
         endQuiz();
       }
+      document.querySelector('#timer').textContent = timeLeft;
     }
   }
 }
 
+const timer = spawnTimer();
+
 function startQuiz(){
   showSection('question');
-  const timer = startTimer();
+  timer.startTimer();
   nextQuestion();
 }
 
@@ -82,6 +95,34 @@ function nextQuestion(){
 document.querySelector('#start button').addEventListener('click', function(){
   startQuiz();
 });
+
+
+for(const button of document.querySelectorAll('#question button')){
+  button.addEventListener('click', function(){
+    if(this.dataset.correct === 'true'){
+      flashFeedback('Correct!');
+    }else{
+      flashFeedback('Wrong!');
+      timer.subtractTime(10);
+    }
+    nextQuestion();
+  });
+}
+
+function flashFeedback(message){
+  const feedback = document.querySelector('#feedback');
+  // Set feedback message
+  feedback.querySelector('p').textContent = message;
+  // Catch if the feedback is already showing
+  if(!feedback.classList.contains('hidden')){
+    clearTimeout(feedback.dataset.timeoutId);
+  }
+  // Show the feedback for 1 second
+  feedback.classList.remove('hidden');
+  feedback.dataset.timeoutId = setTimeout(() => {
+    feedback.classList.add('hidden');
+  }, 1000);
+}
 
 const questions = [
   {

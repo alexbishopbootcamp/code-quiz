@@ -27,12 +27,15 @@
         <li><button>Answer 3</button></li>
         <li><button>Answer 4</button></li>
       </ul>
-      <hr>
-      <p>Wrong!</p>
+      <div id="feedback" class="hidden">
+        <hr>
+        <p>Wrong!</p>
+      </div>
+
     </section>
     <section id="done" class="hidden">
       <h1>All done!</h1>
-      <p>Your final score is 999</p>
+      <p>Your final score is <span id="score">0</span></p>
       <form>
         <label for="initials">Enter initials:</label>
         <input type="text" id="initials" name="initials">
