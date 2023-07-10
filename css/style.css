@@ -5,10 +5,15 @@
   --section-color: #ffffff;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
+* {
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  margin: 0;
   background-color: var(--background-color);
 }
 
@@ -40,14 +45,117 @@ section {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
 }
 
+/* Align questions to the left */
+#question {
+  align-items: flex-start;
+}
+
+/* Set a fixed height to prevent question buttons jumping around */
+#question > h1 {
+  height: 50px;
+}
+
+#question > ul > li > button {
+  width: 100%;
+  min-width: 150px;
+  /* Pick a fixed width font */
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#done {
+  align-items: flex-start;
+}
+
+#done > form {
+  margin-top: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Make the submit button on the highscore form a bit smaller */
+#done > form > button {
+  margin-left: 11px;
+  padding: 3px 13px;
+  margin: 0;
+}
+
+#done > form > input {
+  margin: 0px 10px;
+  flex-grow: 1;
+}
+
+#highscore {
+  align-items: flex-start;
+}
+
+#highscore > ul {
+  width: 100%;
+}
+
+#highscore > ul > li {
+  padding: 9px 15px;
+}
+
+/* Apply alternating background color for list on highscore page */
+#highscore > ul > li:nth-child(even) {
+  background-color: #f3e2f8;
+}
+#highscore > ul > li:nth-child(odd) {
+  background-color: #d9d3e9;
+}
+
 .hidden {
   display: none;
 }
 
 hr {
+  margin-top: 34px;
   width: 100%;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+p {
+  margin-top: 12px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  /* Prevent the button text from being highlighted */
+  /* https://www.w3schools.com/howto/howto_css_disable_text_selection.asp */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+button:hover {
+  background-color: var(--highlight-color);
 }
 
 #feedback {
   width: 100%;
+  color: #9f9f9f;
+  font-style: italic;
+}
+
+#viewhighscores {
+  color: var(--highlight-color);
+  cursor: pointer;
 }

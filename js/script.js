@@ -98,6 +98,8 @@ function nextQuestion(){
   }
 }
 
+
+// Event listeners
 document.querySelector('#start button').addEventListener('click', function(){
   startQuiz();
 });
@@ -108,6 +110,17 @@ document.querySelector('#highscore #goback').addEventListener('click', function(
 
 document.querySelector('#highscore #clearhighscores').addEventListener('click', function(){
   clearHighscores();
+});
+
+document.querySelector('#viewhighscores').addEventListener('click', function(){
+  showSection('highscore');
+  populateHighscores();
+});
+
+document.querySelector('#done button').addEventListener('click', function(event){
+  // prevent default form submission
+  event.preventDefault();
+  saveHighscore();
 });
 
 // Attach event listeners to our answer buttons
@@ -138,15 +151,14 @@ function flashFeedback(message){
   }, 1000);
 }
 
-document.querySelector('#done button').addEventListener('click', function(event){
-  // prevent default form submission
-  event.preventDefault();
-  saveHighscore();
-});
-
 // Take the user's name and save their highscore to localstorage
 function saveHighscore(){
   const name = document.querySelector('#done input').value;
+  if(!name){
+    // Focus the input and return
+    document.querySelector('#done input').focus();
+    return;
+  }
   const score = timer.getSecondsLeft();
   const highscores = JSON.parse(localStorage.getItem('highscores')) || [];
   highscores.push({name, score});

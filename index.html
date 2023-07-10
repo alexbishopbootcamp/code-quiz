@@ -10,7 +10,7 @@
 </head>
 <body>
   <header>
-    <span>View High Scores</span>
+    <span id="viewhighscores">View High Scores</span>
     <span>Time: <span id="timer">0</span></span>
   </header>
   <main>
@@ -35,7 +35,7 @@
     </section>
     <section id="done" class="hidden">
       <h1>All done!</h1>
-      <p>Your final score is <span id="score">0</span></p>
+      <p>Your final score is <span id="score">🍌</span>.</p>
       <form>
         <label for="initials">Enter initials:</label>
         <input type="text" id="initials" name="initials">
@@ -51,8 +51,10 @@
         <li>4. DDD - 666</li>
         <li>5. EEE - 555</li>
       </ul>
-      <button id="goback">Go Back</button>
-      <button id="clearhighscores">Clear High Scores</button>
+      <div>
+        <button id="goback">Go Back</button>
+        <button id="clearhighscores">Clear High Scores</button>
+      </div>
     </section>
   </main>
 </body>
