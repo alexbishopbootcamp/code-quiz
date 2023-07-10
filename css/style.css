@@ -1,7 +1,8 @@
 :root {
   --primary-color: #351c75;
   --highlight-color: #bd60e7;
-  --background-color: #ffffff;
+  --background-color: #f9fbfd;
+  --section-color: #ffffff;
 }
 
 body {
@@ -35,7 +36,8 @@ section {
   align-items: center;
   padding: 30px;
   width: 600px;
-  background-color: var(--background-color);
+  background-color: var(--section-color);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
 }
 
 .hidden {
