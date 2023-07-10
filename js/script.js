@@ -90,7 +90,7 @@ function nextQuestion(){
     // Go through each button and update it's text and data attribute
     const buttons = document.querySelectorAll('#question button');
     for (let i = 0; i < currentQuestion.answers.length; i++) {
-      buttons[i].textContent = currentQuestion.answers[i];
+      buttons[i].textContent = `${i + 1}. ${currentQuestion.answers[i]}`;
       buttons[i].dataset.correct = i === currentQuestion.correct;
     }
   } else {
@@ -154,9 +154,10 @@ function flashFeedback(message){
 // Take the user's name and save their highscore to localstorage
 function saveHighscore(){
   const name = document.querySelector('#done input').value;
-  if(!name){
-    // Focus the input and return
+  // Limit name length between 2 and 20 chars
+  if(name.length < 2 || name.length > 20){
     document.querySelector('#done input').focus();
+    alert('Name must be between 2 and 20 characters');
     return;
   }
   const score = timer.getSecondsLeft();
@@ -177,10 +178,11 @@ function populateHighscores(){
   const list = document.querySelector('#highscore ul');
   // Clear the list
   list.innerHTML = '';
-  // Add each highscore to the list
-  for(const highscore of highscores){
+  // Add each highscore to the list, numbered
+  for (let i = 0; i < highscores.length; i++) {
+    const highscore = highscores[i];
     const li = document.createElement('li');
-    li.textContent = `${highscore.name} - ${highscore.score}`;
+    li.textContent = `${i + 1}. ${highscore.name} – ${highscore.score}`;
     list.appendChild(li);
   }
 }

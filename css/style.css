@@ -8,6 +8,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -52,14 +53,15 @@ section {
 
 /* Set a fixed height to prevent question buttons jumping around */
 #question > h1 {
-  height: 50px;
+  height: 80px;
 }
 
 #question > ul > li > button {
   width: 100%;
   min-width: 150px;
-  /* Pick a fixed width font */
-  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
+  /* Pick a modern fixed width font */
+  font-family: 'Roboto Mono', monospace;
 }
 
 #done {
@@ -145,8 +147,11 @@ button {
   user-select: none; /* Standard syntax */
 }
 
-button:hover {
-  background-color: var(--highlight-color);
+@media (hover: hover) {
+  /* Apply hover effect only on non-touch devices */
+  button:hover {
+    background-color: var(--highlight-color);
+  }
 }
 
 #feedback {
@@ -159,3 +164,30 @@ button:hover {
   color: var(--highlight-color);
   cursor: pointer;
 }
+
+/* Media queries */
+@media (max-width: 768px) {
+  section {
+    width: 100%;
+  }
+  p {
+    padding: 0px 20px;
+  }
+  #question > h1 {
+    height: 80px;
+  }
+  #question > ul > li > button {
+    min-width: 100%;
+  }
+  #question > ul {
+    width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  #question > h1 {
+    height: 120px;
+  }
+}
+
+
