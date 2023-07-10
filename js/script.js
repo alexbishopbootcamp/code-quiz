@@ -55,15 +55,33 @@ function startQuiz(){
   nextQuestion();
 }
 
-function nextQuestion(){
-
+function* questionGenerator(){
+  for(const question of questions){
+    yield question;
+  }
 }
 
+const question = questionGenerator();
+
+function nextQuestion(){
+  const {value: currentQuestion, done} = question.next(); // Error happens here
+  if(!done){
+    // Set the question text
+    document.querySelector('#question h1').textContent = currentQuestion.question;
+    // Go through each button and update it's text and data attribute
+    const buttons = document.querySelectorAll('#question button');
+    for (let i = 0; i < currentQuestion.answers.length; i++) {
+      buttons[i].textContent = currentQuestion.answers[i];
+      buttons[i].dataset.correct = i === currentQuestion.correct;
+    }
+  }else{
+    endQuiz();
+  }
+}
 
 document.querySelector('#start button').addEventListener('click', function(){
   startQuiz();
 });
-
 
 const questions = [
   {
