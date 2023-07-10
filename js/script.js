@@ -1,9 +1,15 @@
+// Our timer and question generator
+const timer = spawnTimer();
+let question;
+
 init();
 
 function init(){
   // Hide all sections
   hideAll();
   showSection('start');
+  // Reset timer text
+  document.querySelector('#timer').textContent = '0';
 }
 
 function hideAll(){
@@ -29,9 +35,8 @@ function spawnTimer(){
   let timeLeft;
   // Return functions that we can use to interact with the timer
   return {
-    startTimer: () => {
-      // Start with 75 seconds on the clock
-      timeLeft = 750;
+    startTimer: (seconds) => {
+      timeLeft = seconds;
       document.querySelector('#timer').textContent = timeLeft;
 
       intervalId = setInterval(() => {
@@ -60,24 +65,25 @@ function spawnTimer(){
   }
 }
 
-const timer = spawnTimer();
-
 function startQuiz(){
   showSection('question');
-  timer.startTimer();
+  // 10 seconds per question
+  timer.startTimer(200);
+  // Create a new question generator
+  question = questionGenerator();
+  // Start the first question
   nextQuestion();
 }
 
+// Generator function to return the next question on each call of next()
 function* questionGenerator(){
   for(const question of questions){
     yield question;
   }
 }
 
-const question = questionGenerator();
-
 function nextQuestion(){
-  const {value: currentQuestion, done} = question.next(); // Error happens here
+  const {value: currentQuestion, done} = question.next();
   if(!done){
     // Set the question text
     document.querySelector('#question h1').textContent = currentQuestion.question;
@@ -87,7 +93,7 @@ function nextQuestion(){
       buttons[i].textContent = currentQuestion.answers[i];
       buttons[i].dataset.correct = i === currentQuestion.correct;
     }
-  }else{
+  } else {
     endQuiz();
   }
 }
@@ -96,7 +102,15 @@ document.querySelector('#start button').addEventListener('click', function(){
   startQuiz();
 });
 
+document.querySelector('#highscore #goback').addEventListener('click', function(){
+  init();
+});
 
+document.querySelector('#highscore #clearhighscores').addEventListener('click', function(){
+  clearHighscores();
+});
+
+// Attach event listeners to our answer buttons
 for(const button of document.querySelectorAll('#question button')){
   button.addEventListener('click', function(){
     if(this.dataset.correct === 'true'){
@@ -157,6 +171,11 @@ function populateHighscores(){
     li.textContent = `${highscore.name} - ${highscore.score}`;
     list.appendChild(li);
   }
+}
+
+function clearHighscores(){
+  localStorage.removeItem('highscores');
+  populateHighscores();
 }
 
 const questions = [
