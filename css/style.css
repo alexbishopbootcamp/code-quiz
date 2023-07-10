@@ -148,6 +148,10 @@ button {
   user-select: none; /* Standard syntax */
 }
 
+button:focus {
+  outline: 4px solid var(--highlight-color)
+}
+
 @media (hover: hover) {
   /* Apply hover effect only on non-touch devices */
   button:hover {
